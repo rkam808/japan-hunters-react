@@ -12,6 +12,7 @@ class BountiesController < ApplicationController
     def create
         @bounty = Bounty.new(bounty_params)
         @bounty.user = current_user
+        @bounty.photo_url = @bounty.photo.url
 
         # new_item = Item.new()
         # authorize @bounty - for pundit
@@ -19,7 +20,7 @@ class BountiesController < ApplicationController
         if @bounty.save
             redirect_to bounty_path(@bounty)
         else
-            redirect_to new_bounty_path
+            redirect_to bounties_path
         end
     end
 
