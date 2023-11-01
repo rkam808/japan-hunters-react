@@ -1,0 +1,6 @@
+<%= simple_form_for @bounty do |f| %>
+  <%= f.input :description, placeholder: 'Enter a description of your Bounty' %>
+  <%= f.input :price, label: 'Price in JPY' %>
+  <%= f.input :photo, as: :file %>
+  <%= f.button :submit %>
+<% end %>
