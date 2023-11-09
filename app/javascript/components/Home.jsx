@@ -15,7 +15,7 @@ export default () => (
           className="btn btn-warning btn-lg"
           role="button"
         >
-          Check out Bounties
+          Open Bounties
         </Link>
       </div>
     </div>
