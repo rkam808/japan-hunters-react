@@ -1,9 +1,28 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+require 'faker'
+
+puts 'Clearing database'
+User.destroy_all
+Bounty.destroy_all
+
+puts 'Generating Users'
+10.times do
+    User.create!(
+        email: "#{Faker::Name.unique.first_name}@example.com",
+        username: Faker::Name.name,
+        password: 'test123'
+    )
+end
+
+puts 'Generating Bounties'
+20.times do |i|
+    bounty = Bounty.new(
+        description: Faker::Game.title,
+        price: rand(1000...20000)
+        )
+        
+    bounty.photo_url = "https://source.unsplash.com/featured/300x20#{i}"
+    bounty.user = User.all.sample
+    bounty.save!
+end
+
+puts 'Done'
